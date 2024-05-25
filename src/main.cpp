@@ -308,6 +308,10 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle)
     HyprlandAPI::addDispatcher(PHANDLE, "split-movetoworkspacesilent", splitMoveToWorkspaceSilent);
     HyprlandAPI::addDispatcher(PHANDLE, "split-changemonitor", splitChangeMonitor);
     HyprlandAPI::addDispatcher(PHANDLE, "split-changemonitorsilent", splitChangeMonitorSilent);
+    HyprlandAPI::addDispatcher(PHANDLE, "split-refresh", [](std::string const&) {
+        SCallbackInfo callbackInfo;
+        refreshMapping(nullptr, callbackInfo, std::any{});
+    });
 
     HyprlandAPI::reloadConfig();
     g_pConfigManager->tick();
